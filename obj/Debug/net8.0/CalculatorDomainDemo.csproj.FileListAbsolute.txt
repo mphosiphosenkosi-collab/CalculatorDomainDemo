@@ -13,3 +13,4 @@ C:\Users\Skye\Desktop\CalculatorDomainDemo\obj\Debug\net8.0\refint\CalculatorDom
 C:\Users\Skye\Desktop\CalculatorDomainDemo\obj\Debug\net8.0\CalculatorDomainDemo.pdb
 C:\Users\Skye\Desktop\CalculatorDomainDemo\obj\Debug\net8.0\CalculatorDomainDemo.genruntimeconfig.cache
 C:\Users\Skye\Desktop\CalculatorDomainDemo\obj\Debug\net8.0\ref\CalculatorDomainDemo.dll
+C:\Users\Skye\Desktop\CalculatorDomainDemo\obj\Debug\net8.0\CalculatorDomainDemo.MvcApplicationPartsAssemblyInfo.cache

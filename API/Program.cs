@@ -16,13 +16,9 @@ var dataDirectory = Path.Combine(
     "Data"
 );
 
-builder.Services.AddSingleton<ICalculationStore>(
-    new FileCalculationStore(dataDirectory)
-);
-
 // Add services to the container
 builder.Services.AddDbContext<CalculatorDbContext>(options =>
-options.UseSqlite("Data source=Calculator.db"));
+options.UseSqlite(builder.Configuration.GetConnectionString("CalculatorDb")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 .AddEntityFrameworkStores<CalculatorDbContext>()
@@ -30,11 +26,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.AddControllers(); //tells ASP.NET that this application will use controllers as entry points
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<ICalculationStore>(
-    new FileCalculationStore(dataDirectory)
-);
-builder.Services.AddSingleton<CalculatorService>();
+builder.Services.AddScoped<ICalculationStore, EFCalculationStore>();
+builder.Services.AddScoped<CalculatorService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<EFCalculationStore>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -66,6 +61,9 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
+    var dbContext = scope.ServiceProvider.GetRequiredService<CalculatorDbContext>();
+    await dbContext.Database.EnsureCreatedAsync();
+    
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 

@@ -2,6 +2,7 @@ using System.Reflection;
 using CalculatorDomain.Logic;
 using CalculatorDomain.Persistence;
 using CalculatorDomainDemo.Persistence;
+using CalculatorDomainDemo.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

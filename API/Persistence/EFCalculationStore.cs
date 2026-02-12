@@ -11,14 +11,24 @@ public class EFCalculationStore : ICalculationStore
     {
         _context = dbContext;
     }
+    
     public async Task SaveAsync(Calculation calculation)
     {
         _context.Calculations.Add(calculation);
         await _context.SaveChangesAsync();
     }
+    
     public async Task<IReadOnlyList<Calculation>> LoadAllAsync()
     {
-        return await _context.Calculations.OrderByDescending(c => c.CreatedAt)
-        .ToListAsync();
+        return await _context.Calculations
+            .Where(c => c.IsActive)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Calculation>> LoadAllAddsAsync()
+    {
+        return await _context.Calculations
+            .Where(c => c.IsActive && c.Operation == OperationType.Add)
+            .ToListAsync();
     }
 }

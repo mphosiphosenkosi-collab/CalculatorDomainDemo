@@ -10,3 +10,4 @@ C:\Users\Skye\Desktop\CalculatorDomainDemo\CalculatorDomainDemo\obj\Debug\net8.0
 C:\Users\Skye\Desktop\CalculatorDomainDemo\CalculatorDomainDemo\obj\Debug\net8.0\refint\CalculatorDomainDemo.dll
 C:\Users\Skye\Desktop\CalculatorDomainDemo\CalculatorDomainDemo\obj\Debug\net8.0\CalculatorDomainDemo.pdb
 C:\Users\Skye\Desktop\CalculatorDomainDemo\CalculatorDomainDemo\obj\Debug\net8.0\ref\CalculatorDomainDemo.dll
+C:\Users\Skye\Desktop\CalculatorDomainDemo\CalculatorDomainDemo\obj\Debug\net8.0\CalculatorDomainDemo.csproj.AssemblyReference.cache

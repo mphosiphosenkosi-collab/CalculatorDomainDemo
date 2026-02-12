@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using API.DTOs;
+using CalculatorDomainDemo.Domain;
 
 namespace API.Controllers
 {

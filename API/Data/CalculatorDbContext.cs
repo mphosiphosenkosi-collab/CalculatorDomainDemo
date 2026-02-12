@@ -14,12 +14,22 @@ public class CalculatorDbContext
     }
 
     public DbSet<Calculation> Calculations { get; set; }
+    public DbSet<ApplicationUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Calculation>().ToTable("Calculation")
+        
+        modelBuilder.Entity<Calculation>()
+            .ToTable("Calculation")
             .HasKey(c => c.Id);
+
+        // Configure relationship
+        modelBuilder.Entity<Calculation>()
+            .HasOne(c => c.User)
+            .WithMany()
+            .HasForeignKey(c => c.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 
 }

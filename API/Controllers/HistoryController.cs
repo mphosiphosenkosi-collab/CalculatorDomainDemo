@@ -7,22 +7,43 @@ using API.DTOs;
 
 [ApiController]
 [Route("api/history")]
-[Authorize(Roles ="Admin")]
+//[Authorize(Roles ="Admin")]
 public class HistoryController : ControllerBase
 {
     private readonly CalculatorDbContext _context; 
-
-    public HistoryController(CalculatorDbContext context)
+    private readonly EFCalculationStore calculationStore;
+    
+    public HistoryController(CalculatorDbContext context, EFCalculationStore eFCalculationStore)
     {
-        _context = context; 
+        _context = context;
+        calculationStore = eFCalculationStore;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetHistory()
     {
-        var history = await _context.Calculations.ToListAsync();
+        var history = await _context.Calculations
+            .Where(c => c.IsActive)
+            .Include(c => c.User)
+            .OrderByDescending(c => c.CreatedAt)
+            .ToListAsync();
 
         var response = history.Select(c => new CalculationHistoryItemDto
+        {
+            Left = c.Left,
+            Right = c.Right,
+            Operation = c.Operation.ToString(),
+            Result = c.Result
+        });
+
+        return Ok(response);
+    }
+
+    [HttpGet("adds")]
+    public async Task<IActionResult> GetAdditions()
+    {
+        var adds = await calculationStore.LoadAllAddsAsync();
+        var response = adds.Select(c => new CalculationHistoryItemDto
         {
             Left = c.Left,
             Right = c.Right,

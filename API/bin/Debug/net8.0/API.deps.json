@@ -821,6 +821,9 @@
       },
       "System.Threading.Channels/6.0.0": {},
       "CalculatorDomainDemo/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0"
+        },
         "runtime": {
           "CalculatorDomainDemo.dll": {
             "assemblyVersion": "1.0.0",

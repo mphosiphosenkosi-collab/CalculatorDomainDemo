@@ -7,5 +7,6 @@ namespace API.DTOs
         public int Id { get; set; }
         public OperationType Operation { get; set; }
         public double Result { get; set; }
+        public string Username { get; set; }
     }
 }
